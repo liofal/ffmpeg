@@ -19,7 +19,7 @@ RUN apt-get update && \
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Set the working directory to /twitch
+# Set the working directory to /work
 WORKDIR /work
 
 # Optionally define a volume for data

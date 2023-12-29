@@ -11,9 +11,9 @@ services:
     env_file: 
         - .env
         # - ../global.env    
-    hostname: liofal.synology.me
+    hostname: ffmpeg.liofal.net
     volumes:
-      - /volume1/twitch:/work
+      - /users/lionelfalise/Downloads:/work
     logging:
       driver: json-file
     deploy:
