@@ -1,20 +1,9 @@
-# Use Ubuntu 22.04 LTS as the base image
+# Use Ubuntu 24.04 LTS as the base image
 FROM ubuntu:24.04
-
-# Update package lists, install software-properties-common
-RUN apt-get update && \
-    apt-get install -y software-properties-common
-
-# Add the PPA for FFmpeg
-RUN add-apt-repository ppa:ubuntuhandbook1/ffmpeg6 -y
 
 # Update package lists again and install FFmpeg
 RUN apt-get update && \
     apt-get install -y ffmpeg
-
-# Clean up
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 # Set the working directory to /app
 WORKDIR /app
