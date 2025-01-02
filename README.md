@@ -1,29 +1,64 @@
+# FFmpeg Conversion Service
 
-# FFmpeg Docker Compose Service
-
-## Introduction
-This Docker Compose service utilizes FFmpeg to process video files. The service is built on the `liofal/ffmpeg` image and is designed to work with ONVIF compliant video streams.
+This project provides a Dockerized service to convert `.ts` video files to `.mp4` format using FFmpeg. The conversion process is automated and runs periodically based on the specified sleep time.
 
 ## Prerequisites
-Before you begin, ensure you have the following installed:
+
 - Docker
 - Docker Compose
 
-## Installation
-1. Clone the repository to your local machine:
-   ```bash
-   git clone [your-repo-url]
-   cd [your-repo-directory]
-   ```
+## Getting Started
 
-2. Build the Docker image:
-   ```bash
-   docker-compose build
-   ```
+### Clone the Repository
 
-## Usage
-To use the FFmpeg service, run the following command:
-```bash
-docker-compose run ffmpeg -i 'input-file.mp4' -c:v copy -c:a aac 'output-file.mp4'
+```sh
+git clone https://github.com/liofal/ffmpeg6.git
+cd ffmpeg6
 ```
-Replace `input-file.mp4` and `output-file.mp4` with your source and destination file names, respectively.
+
+### Configuration
+
+Create a `.env` file in the project root directory with the following content:
+
+```properties
+SLEEPTIME=600
+WORKDIR=/app/downloads
+```
+
+- `SLEEPTIME`: Time in seconds to wait before the next conversion cycle.
+- `WORKDIR`: Directory where the `.ts` files are located and where the converted `.mp4` files will be saved.
+
+### Build and Run the Docker Container
+
+Use Docker Compose to build and run the container:
+
+```sh
+docker-compose up --build
+```
+
+This will build the Docker image and start the container. The service will automatically convert any `.ts` files in the specified `WORKDIR` to `.mp4` format.
+
+### Volumes
+
+The `docker-compose.yml` file is configured to mount a local directory to the container's working directory. Update the `volumes` section as needed:
+
+```yaml
+volumes:
+  - /path/to/local/downloads:/app/downloads
+```
+
+### Environment Variables
+
+You can specify environment variables in the `.env` file or directly in the `docker-compose.yml` file.
+
+### Stopping the Service
+
+To stop the service, use:
+
+```sh
+docker-compose down
+```
+
+## License
+
+This project is licensed under the MIT License.
