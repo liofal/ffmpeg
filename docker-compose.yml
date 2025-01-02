@@ -1,27 +1,15 @@
-version: '3.7'
-
 services:
   ffmpeg:
-    image: liofal/ffmpeg:latest
+    image: ghcr.io/liofal/ffmpeg:1.0.0
     container_name: ffmpeg
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
+    
     env_file: 
         - .env
         # - ../global.env    
-    hostname: ffmpeg.liofal.net
     volumes:
-      - /users/lionelfalise/Downloads:/work
-      # - /Volumes/movies:/work
-    stdin_open: true
-    tty: true
-    entrypoint: /bin/bash
-    logging:
-      driver: json-file
-    deploy:
-      resources:
-        limits:
-          memory: 128M
+      - /Volumes/twitch:/app/downloads
 
