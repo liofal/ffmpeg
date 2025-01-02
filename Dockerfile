@@ -1,5 +1,5 @@
 # Use Ubuntu 22.04 LTS as the base image
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Update package lists, install software-properties-common
 RUN apt-get update && \
