@@ -1,8 +1,5 @@
 # Use Ubuntu 22.04 LTS as the base image
-FROM ubuntu:latest
-
-# Set non-interactive installation mode
-ENV DEBIAN_FRONTEND=noninteractive
+FROM ubuntu:22.04
 
 # Update package lists, install software-properties-common
 RUN apt-get update && \
@@ -19,11 +16,13 @@ RUN apt-get update && \
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Set the working directory to /work
-WORKDIR /work
+# Set the working directory to /app
+WORKDIR /app
 
-# Optionally define a volume for data
-VOLUME ["/work"]
+# Add entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+# Make the entrypoint script executable
+RUN chmod +x /entrypoint.sh
 
-# The entrypoint can be set to ffmpeg if this container will only be used for FFmpeg commands
-ENTRYPOINT ["ffmpeg"]
+# Configure entrypoint with shell script
+ENTRYPOINT ["/entrypoint.sh"]
