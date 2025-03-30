@@ -5,7 +5,16 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "dev",
 	"runServices": ["dev"],
-	"workspaceFolder": "/app"
+	"postCreateCommand": "pip install -r requirements.txt",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+		  "settings": {
+			"terminal.integrated.shell.linux": "/bin/bash",
+			"terminal.integrated.defaultProfile.linux": "bash"
+		  }
+		}
+	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
