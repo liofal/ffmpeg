@@ -1,6 +1,6 @@
 services:
   ffmpeg:
-    image: ghcr.io/liofal/ffmpeg6:1.0.0
+    image: ghcr.io/liofal/ffmpeg:1.0.0
     container_name: ffmpeg
     build:
       context: .
@@ -12,4 +12,3 @@ services:
         # - ../global.env    
     volumes:
       - /Volumes/twitch:/app/downloads
-

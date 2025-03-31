@@ -12,8 +12,8 @@ This project provides a Dockerized service to convert `.ts` video files to `.mp4
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/liofal/ffmpeg6.git
-cd ffmpeg6
+git clone https://github.com/liofal/ffmpeg.git
+cd ffmpeg
 ```
 
 ### Configuration
@@ -58,6 +58,10 @@ To stop the service, use:
 ```sh
 docker-compose down
 ```
+
+## Important Note on Project Scope
+
+This project was previously named `ffmpeg6` and focused specifically on FFmpeg version 6. It has now been renamed to `ffmpeg` to reflect a broader scope that may include features or compatibility changes beyond version 6. Please be aware that future updates might introduce changes based on newer FFmpeg versions or other related tools.
 
 ## License
 
