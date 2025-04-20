@@ -1,0 +1,11 @@
+services:
+  ffmpeg-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Mount the project directory to access scripts
+    volumes:
+      - .:/app
+    # Override the entrypoint to run the test script
+    entrypoint: ["/app/test_entrypoint.sh"]
+    # No need for external volumes, env_file, or restart policy for the test

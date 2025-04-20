@@ -36,7 +36,9 @@ Use Docker Compose to build and run the container:
 docker-compose up --build
 ```
 
-This will build the Docker image and start the container. The service will automatically convert any `.ts` files in the specified `WORKDIR` to `.mp4` format.
+This will build the Docker image and start the container. The service will automatically scan for `.ts` files in the specified `WORKDIR`. It attempts to convert them to `.mp4` format using `ffmpeg -c copy`. 
+- Successful conversions result in the original `.ts` file being deleted.
+- If a conversion fails (due to errors like invalid data or resource limits), the original `.ts` file will be renamed to `.ts.failed` to prevent repeated failed attempts on the same file.
 
 ### Volumes
 
@@ -58,6 +60,27 @@ To stop the service, use:
 ```sh
 docker-compose down
 ```
+
+## Testing
+
+This project includes an automated test script (`test_entrypoint.sh`) and a dedicated Docker Compose file (`docker-compose.test.yml`) to verify the entrypoint script's behavior.
+
+To run the tests:
+
+1.  Ensure Docker is running.
+2.  Execute the following command from the project root:
+
+    ```sh
+    docker compose -f docker-compose.test.yml up --build --abort-on-container-exit
+    ```
+
+The test script will:
+- Create a temporary test directory inside the container.
+- Generate a small valid `.ts` file and an empty `.ts` file (to simulate failure).
+- Run the main `entrypoint.sh` script in the background for a short period.
+- Verify that the valid file was converted to `.mp4` and the original removed.
+- Verify that the invalid file failed conversion and was renamed to `.ts.failed`.
+- Exit with code 0 on success or 1 on failure.
 
 ## Important Note on Project Scope
 
