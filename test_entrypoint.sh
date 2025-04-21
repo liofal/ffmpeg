@@ -54,11 +54,11 @@ else
   exit 1
 fi
 
-# Check 2: Bad file failed and was renamed
-if [ -f "$WORKDIR/bad.ts.failed" ] && [ ! -f "$WORKDIR/bad.ts" ]; then
-  echo "✅ SUCCESS: bad.ts failed conversion and was renamed to bad.ts.failed."
+# Check 2: Bad file failed, was renamed, and incomplete mp4 removed
+if [ -f "$WORKDIR/bad.ts.failed" ] && [ ! -f "$WORKDIR/bad.ts" ] && [ ! -f "$WORKDIR/bad.mp4" ]; then
+  echo "✅ SUCCESS: bad.ts failed conversion, was renamed to bad.ts.failed, and incomplete bad.mp4 removed."
 else
-  echo "❌ FAILURE: bad.ts was not handled correctly after failure."
+  echo "❌ FAILURE: bad.ts failure handling (rename/cleanup) was incorrect."
   exit 1
 fi
 

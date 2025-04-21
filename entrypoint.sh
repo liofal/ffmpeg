@@ -43,6 +43,8 @@ while true; do
       rm "${ts_file}"
     else
       echo "ERROR: Conversion failed for '${ts_file}' (exit code: $exit_code)."
+      # Remove potentially incomplete output file
+      rm -f "$mp4_file" 
       echo "Renaming to '${failed_file}' to prevent retries."
       mv "${ts_file}" "${failed_file}"
       # Optionally add notification logic here
