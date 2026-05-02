@@ -28,6 +28,14 @@ WORKDIR=/app/downloads
 - `SLEEPTIME`: Time in seconds to wait before the next conversion cycle.
 - `WORKDIR`: Directory where the `.ts` files are located and where the converted `.mp4` files will be saved.
 
+### Failure handling
+
+The converter writes to a temporary `.mp4.part` file first. When conversion succeeds, the temporary file is moved to `.mp4` and the source `.ts` file is removed.
+
+If FFmpeg fails, the converter removes partial `.mp4` output and renames the source file from `video.ts` to `video.ts.failed`. This prevents restart policies from retrying the same failing file indefinitely.
+
+Large `.ts` files can require more than 256M of memory even when using `-c copy` remuxing. For large recordings, configure the container with at least 512M of memory or remove the memory limit.
+
 ### Build and Run the Docker Container
 
 Use Docker Compose to build and run the container:
