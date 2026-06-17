@@ -1,5 +1,5 @@
 # Use Ubuntu 24.04 LTS as the base image
-FROM ubuntu:24.04
+FROM ubuntu:26.04
 
 # Update package lists again and install FFmpeg
 RUN apt-get update && \
